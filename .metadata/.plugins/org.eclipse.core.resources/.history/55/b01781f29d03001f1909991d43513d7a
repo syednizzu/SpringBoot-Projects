@@ -1,0 +1,28 @@
+package com.example.firstTask.mapper.CustomerMapper;
+
+import java.util.List;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
+//import org.mapstruct.factory.Mappers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import com.example.firstTask.model.Customer;
+import com.example.firstTask.model.VO.CustomerVO;
+
+//@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper
+public interface CustomerMapper {
+	
+	Logger logger = LoggerFactory.getLogger("This is a mapping of POJO to VO");
+
+	
+	CustomerVO toCustomerVO(Customer customer1);
+	Customer toCustomer(CustomerVO customerVO1);
+	List<CustomerVO> toCustomerVo(List<Customer> custList);
+	List<Customer> toCustomer(List<CustomerVO> custVoList);
+	
+}
+

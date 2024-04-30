@@ -1,0 +1,49 @@
+package com.example.firstTask.customerEO;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.firstTask.model.Customer;
+import com.example.firstTask.model.HealthcheckEndpoint;
+import com.example.firstTaskcustomerDAO.customerDbDAO;
+
+@Service("customerEoService")
+public class CustomerEOImpl implements CustomerEO{
+
+	@Autowired
+	private customerDbDAO customerDbDao; 
+	
+	@Autowired
+	private CustomerMapper customerMapper;
+	
+	Logger logger = LoggerFactory.getLogger(CustomerEOImpl.class);
+	
+	@Override
+	public Customer saveCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		customerDbDao.save(customer)
+		
+		studentDbDao.save(studentMapper.toStudentVo(student));
+		logger.info("Given student data is saved in database.");
+		return student;
+	}
+
+	@Override
+	public List<Customer> getAllCustomers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HealthcheckEndpoint healthcheckGet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+}

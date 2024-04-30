@@ -1,0 +1,36 @@
+package com.example.secondTask.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+@RequestMapping("/sbapp2")
+public class CustomerController {
+	
+	Logger logger = LoggerFactory.getLogger(StudentController.class);
+	
+	@Autowired
+	private StudentService studService;
+	
+	
+	@GetMapping("/hello")
+	public String hello() {
+	    return "Hello from Second Application...";
+	}
+	
+	@GetMapping("/getStudents")
+	public ResponseEntity<Student[]> getAllStudents() throws URISyntaxException{
+		logger.info("Retrieving all Students data using Rest template from Controller...");
+		return new ResponseEntity(studService.getStudentsByRestTemplate(), HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/feignGetStudents")
+	public ResponseEntity<List<Student>> feignGetAllStudents() throws URISyntaxException{
+		logger.info("Retrieving all Students data using feign client from Controller...");
+		return new ResponseEntity(studService.feignGetAllStudents(), HttpStatus.OK);
+	}
+
+}

@@ -1,0 +1,13 @@
+1714040269543	Rename type 'studentEO'
+1714040280930	Rename type 'studentEOImpl'
+1714040324150	Rename type 'StudentEO'
+1714040336398	Rename type 'StudentEOImpl'
+1714042494310	Rename type 'customerDbDAO'
+1714049747611	Move compilation unit
+1714049753518	Delete element
+1714049836666	Rename package 'com.example.firstTaskcustomerDAO'
+1714110465908	Delete element
+1714112197335	Rename package 'com.example.firstTask.mapper'
+1714112792594	Copy package
+1714112813329	Delete element
+1714116238567	Rename package 'com.example.firstTask.mapper.CustomerMapper'

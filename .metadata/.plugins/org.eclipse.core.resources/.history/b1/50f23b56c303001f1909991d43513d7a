@@ -1,0 +1,14 @@
+package com.example.demo.feignclient;
+
+import java.util.List;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import com.example.demo.model.Student;
+
+@FeignClient(value="studentFeign", url="http://localhost:8082/sbapp1/retrieval")
+public interface DataRetrieval {
+
+	@GetMapping("/")
+	public List<Student> getAllStudents();
+	
+}

@@ -1,0 +1,27 @@
+package com.example.firstTask.mapperService;
+
+import java.util.List;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
+//import org.mapstruct.factory.Mappers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.example.firstTask.model.Customer;
+import com.example.firstTask.model.VO.CustomerVO;
+
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface CustomerMapper {
+	
+	Logger logger = LoggerFactory.getLogger("This is a mapping of POJO to VO");
+
+	//StudentMapper mapper = Mappers.getMapper(StudentMapper.class);
+	
+	
+	CustomerVO toCustomerVO(Customer customer1);
+	Customer toCustomer(CustomerVO customerVO1);
+	List<CustomerVO> toStudentVo(List<Customer> custList);
+	List<Customer> toStudent(List<CustomerVO> custVoList);
+	
+}
+

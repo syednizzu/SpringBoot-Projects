@@ -1,0 +1,40 @@
+package com.example.firstTask.customerBO;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.firstTask.customerEO.CustomerEO;
+import com.example.firstTask.model.Customer;
+import com.example.firstTask.model.HealthcheckEndpoint;
+
+public class CustomerBoImpl implements CustomerBO{
+
+	@Autowired
+	private CustomerEO customerEoService;
+	
+	Logger logger = LoggerFactory.getLogger(CustomerBoImpl.class);
+	
+	@Override
+	public Customer saveCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		logger.info("Customerg data is getting saved...");
+		return customerEoService.saveCustomer(customer);
+	}
+
+	@Override
+	public List<Customer> findAll() {
+		// TODO Auto-generated method stub
+		logger.info("Retrieving all customers data...");
+		return customerEoService.getAllCustomer();
+	}
+
+	@Override
+	public HealthcheckEndpoint healthcheckGet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

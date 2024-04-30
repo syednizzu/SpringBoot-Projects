@@ -1,0 +1,30 @@
+spring.application.name=ApiGateway
+
+server.port=8084
+
+#Gateway configuration
+spring.cloud.gateway.routes=
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: customer
+          uri: http://8081
+          predicates:
+            - Path=/app1/**
+            
+        - id: secondApplication
+          uri: http://8082
+          predicates:
+            - Path=/app2/**
+
+#Single line configuration    
+#First Application       
+spring.cloud.gateway.routes[0].id=customer;
+spring.cloud.gateway.routes[0].uri=http://8081;
+spring.cloud.gateway.routes[0].predicates[0]=Path=/app1/**
+          
+#Second Application   
+spring.cloud.gateway.routes[0].id=secondApplication;
+spring.cloud.gateway.routes[0].uri=http://8082;
+spring.cloud.gateway.routes[0].predicates[0]=Path=/app2/**          

@@ -1,0 +1,13 @@
+package com.example.secondTask.service;
+
+import java.net.URISyntaxException;
+import java.util.List;
+
+import com.example.demo.model.Student;
+
+public interface CustomerService {
+	
+	public Student[] getStudentsByRestTemplate() throws URISyntaxException;
+	
+	public List<Student> feignGetAllStudents() throws URISyntaxException;
+}

@@ -1,0 +1,11 @@
+package com.example.firstTask.util;
+
+import org.mapstruct.factory.Mappers;
+
+import com.example.firstTask.mapper.CustomerMapper.CustomerMapper;
+
+public class Constants {
+
+	public static CustomerMapper studentMapper = Mappers.getMapper(CustomerMapper.class);
+	
+}

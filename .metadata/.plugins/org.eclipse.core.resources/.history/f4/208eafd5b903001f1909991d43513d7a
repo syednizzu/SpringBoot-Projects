@@ -1,0 +1,32 @@
+package com.example.secondTask.bo;
+
+import java.net.URISyntaxException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CustomerBOImpl implements CustomerBO{
+
+Logger logger = LoggerFactory.getLogger(Controller.class);
+	
+	@Autowired
+	private CustomerEO custEO;
+	
+	@Autowired
+	private DataRetrieval studentFeign;
+	
+	@Override
+	public Customer[] getCustomersByRestTemplate() throws URISyntaxException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Customer> feignGetAllCustomers() throws URISyntaxException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

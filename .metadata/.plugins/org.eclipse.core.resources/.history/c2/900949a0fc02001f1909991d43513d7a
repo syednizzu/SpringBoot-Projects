@@ -1,0 +1,66 @@
+package com.example.firstTask.controller;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.firstTask.customerBO.CustomerBO;
+import com.example.firstTask.model.Customer;
+import com.example.firstTask.model.HealthcheckEndpoint;
+
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/app")
+public class CustomerController {
+	
+	@Autowired
+	private CustomerBO customerBo;
+	
+	Logger logger = LoggerFactory.getLogger(CustomerController.class);	
+	
+	
+	@GetMapping("/hello")
+	public String hello() {
+		System.out.println("calling me");
+	    return "Hello from First Application...";
+	}
+	
+	
+	@PostMapping("/create")
+	public ResponseEntity<Customer> saveCustomer(@Valid @RequestBody Customer customer){
+		logger.info("Customer data will be saved soon...");
+		Customer customer1 = customerBo.saveCustomer(customer);
+		if(customer1==null)
+			return new ResponseEntity("Insertion Error! Cannot create customer", HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Customer>(customer1, HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/retrieval")
+	public ResponseEntity<List<Customer>> getAllCustomers(){
+		logger.info("Retrieving all Customers data...");
+		List<Customer> customers = customerBo.findAll();
+		if(customers==null  || customers.isEmpty())
+			return new ResponseEntity("Sorry! No Customer Available Now!", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
+	}
+	
+	@GetMapping("/gethealthcheck")
+	public  ResponseEntity<HealthcheckEndpoint> getHealthcheck(){
+		logger.info("Processing healthcheck for get customers data...");
+		HealthcheckEndpoint msg = customerBo.healthcheckGet();
+		return ResponseEntity.status(HttpStatus.OK).body(msg);
+	}
+
+}

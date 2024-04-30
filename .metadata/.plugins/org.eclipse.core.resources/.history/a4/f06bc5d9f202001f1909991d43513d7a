@@ -1,0 +1,18 @@
+package com.example.firstTask.customerBO;
+
+import java.util.List;
+
+import com.example.firstTask.model.Customer;
+import com.example.firstTask.model.HealthcheckEndpoint;
+
+public interface CustomerBO {
+	
+	public Customer saveStudent(Customer customer);
+
+	public List<Customer> findAll();
+
+	public HealthcheckEndpoint healthcheckGet();
+
+	//public HealthcheckEndpoint healthcheckPost(Student student);
+
+}

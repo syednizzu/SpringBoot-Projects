@@ -1,0 +1,5 @@
+package com.example.firstTask.customerBO;
+
+public interface CustomerBO {
+
+}

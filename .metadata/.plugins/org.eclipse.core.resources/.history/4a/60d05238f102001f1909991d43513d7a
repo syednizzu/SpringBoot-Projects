@@ -1,0 +1,112 @@
+package com.example.firstTask.customerEO;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.firstTask.model.Customer;
+import com.example.firstTask.model.HealthcheckEndpoint;
+import com.example.firstTaskcustomerDAO.customerDbDAO;
+
+@Service("customerEoService")
+public class CustomerEOImpl implements CustomerEO{
+
+	@Autowired
+	private customerDbDAO customerDbDao; 
+	
+	@Autowired
+	private CustomerMapper customerMapper;
+	
+	Logger logger = LoggerFactory.getLogger(CustomerEOImpl.class);
+	
+	@Override
+	public Customer saveCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		customerDbDao.save(customer)
+		
+		studentDbDao.save(studentMapper.toStudentVo(student));
+		logger.info("Given student data is saved in database.");
+		return student;
+	}
+
+	@Override
+	public List<Customer> getAllCustomers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HealthcheckEndpoint healthcheckGet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Autowired
+	private StudentDBDao studentDbDao;
+	
+	@Autowired
+	private StudentMapper studentMapper;
+	
+	
+	
+	@Override
+	public Student saveStudent(Student student) {
+		
+		studentDbDao.save(studentMapper.toStudentVo(student));
+		logger.info("Given student data is saved in database.");
+		return student;
+	}
+
+	@Override
+	public List<Student> getAllStudents() {
+		
+		logger.info("Retrieving all students data from database....");
+		return studentMapper.toStudent(studentDbDao.findAll());
+	}
+	
+	@Override
+	public HealthcheckEndpoint healthcheckGet() {
+		logger.info("Processing healthcheck for Getting students data from database....");
+		HealthcheckEndpoint healthcheckEndpoint = new HealthcheckEndpoint();
+		try {
+		if(getAllStudents()!=null) {
+			healthcheckEndpoint.setSysCode("Success");
+			healthcheckEndpoint.setSysName("Data Availability");
+			healthcheckEndpoint.setSysDesc("Students data available in database");
+		}
+		}
+		catch(InvalidDataAccessResourceUsageException ex) {
+			healthcheckEndpoint.setSysCode("Failure");
+			healthcheckEndpoint.setSysName("Data Unavailability");
+			healthcheckEndpoint.setSysDesc("Students data not available in database");
+		}
+		return healthcheckEndpoint;
+	}
+	
+	/*
+	@Override
+	public HealthcheckEndpoint healthcheckPost(Student student) {
+		
+		logger.info("Processing healthcheck for Posting/Saving student data in database....");
+		HealthcheckEndpoint healthcheckEndpoint = new HealthcheckEndpoint();
+		
+		if((studentDbDao.save(Constants.studentMapper.toStudentVo(student)))!=null) {
+			healthcheckEndpoint.setSysCode("Success");
+			healthcheckEndpoint.setSysName("Data Saving Success");
+			healthcheckEndpoint.setSysDesc("Student data saved in database");
+		}
+		else {
+			healthcheckEndpoint.setSysCode("Failure");
+			healthcheckEndpoint.setSysName("Data Saving Unsucess");
+			healthcheckEndpoint.setSysDesc("Student data not saved in database");
+		}
+		
+		return healthcheckEndpoint;
+	}*/
+	
+	
+
+}

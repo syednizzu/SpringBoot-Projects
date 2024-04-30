@@ -1,0 +1,64 @@
+package com.example.firstTask.customerEO;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessResourceUsageException;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import com.example.firstTask.customerDAO.CustomerDbDAO;
+import com.example.firstTask.mapper.CustomerMapper;
+import com.example.firstTask.model.Customer;
+import com.example.firstTask.model.HealthcheckEndpoint;
+
+@Component
+@Service
+public class CustomerEOImpl implements CustomerEO{
+
+	@Autowired
+	private CustomerDbDAO customerDbDao; 
+	
+	@Autowired
+	private CustomerMapper customerMapper;
+	
+	Logger logger = LoggerFactory.getLogger(CustomerEOImpl.class);
+	
+	@Override
+	public Customer saveCustomer(Customer customer) {
+		
+		customerDbDao.save(customerMapper.toCustomerVO(customer));
+		logger.info("Given Customer data is saved in database.");
+		return customer;
+	}
+
+	@Override
+	public List<Customer> getAllCustomers() {
+		
+		logger.info("Retrieving all customers data from database....");
+		return customerMapper.toCustomer(customerDbDao.findAll());
+	}
+
+	@Override
+	public HealthcheckEndpoint healthcheckGet() {
+		
+		logger.info("Processing healthcheck for Getting Customers data from database....");
+		HealthcheckEndpoint healthcheckEndpoint = new HealthcheckEndpoint();
+		try {
+		if(getAllCustomers()!=null) {
+			healthcheckEndpoint.setSysCode("Success");
+			healthcheckEndpoint.setSysName("Data Availability");
+			healthcheckEndpoint.setSysDesc("Customers data available in database");
+		}
+		}
+		catch(InvalidDataAccessResourceUsageException ex) {
+			healthcheckEndpoint.setSysCode("Failure");
+			healthcheckEndpoint.setSysName("Data Unavailability");
+			healthcheckEndpoint.setSysDesc("Customers data not available in database");
+		}
+		return healthcheckEndpoint;
+	}
+
+}

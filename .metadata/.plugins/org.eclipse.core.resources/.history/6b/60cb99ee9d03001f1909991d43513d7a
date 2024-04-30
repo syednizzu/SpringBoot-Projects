@@ -1,0 +1,77 @@
+package com.example.firstTask.mapper;
+
+import com.example.firstTask.model.Customer;
+import com.example.firstTask.model.VO.CustomerVO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2024-04-26T11:18:28+0530",
+    comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.2 (Eclipse Adoptium)"
+)
+@Component
+public class CustomerMapperImpl implements CustomerMapper {
+
+    @Override
+    public CustomerVO toCustomerVO(Customer customer1) {
+        if ( customer1 == null ) {
+            return null;
+        }
+
+        CustomerVO customerVO = new CustomerVO();
+
+        customerVO.setCustomerId( customer1.getCustomerId() );
+        customerVO.setCustomerName( customer1.getCustomerName() );
+        customerVO.setEmailId( customer1.getEmailId() );
+        customerVO.setMobNo( customer1.getMobNo() );
+
+        return customerVO;
+    }
+
+    @Override
+    public Customer toCustomer(CustomerVO customerVO1) {
+        if ( customerVO1 == null ) {
+            return null;
+        }
+
+        Customer customer = new Customer();
+
+        customer.setCustomerId( customerVO1.getCustomerId() );
+        customer.setCustomerName( customerVO1.getCustomerName() );
+        customer.setEmailId( customerVO1.getEmailId() );
+        customer.setMobNo( customerVO1.getMobNo() );
+
+        return customer;
+    }
+
+    @Override
+    public List<CustomerVO> toCustomerVo(List<Customer> custList) {
+        if ( custList == null ) {
+            return null;
+        }
+
+        List<CustomerVO> list = new ArrayList<CustomerVO>( custList.size() );
+        for ( Customer customer : custList ) {
+            list.add( toCustomerVO( customer ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<Customer> toCustomer(List<CustomerVO> custVoList) {
+        if ( custVoList == null ) {
+            return null;
+        }
+
+        List<Customer> list = new ArrayList<Customer>( custVoList.size() );
+        for ( CustomerVO customerVO : custVoList ) {
+            list.add( toCustomer( customerVO ) );
+        }
+
+        return list;
+    }
+}

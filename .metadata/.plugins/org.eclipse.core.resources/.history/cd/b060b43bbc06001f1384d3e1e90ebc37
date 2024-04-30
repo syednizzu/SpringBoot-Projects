@@ -1,0 +1,20 @@
+spring.application.name=ApiGateway
+
+server.port=8084
+
+#Gateway configuration
+spring.cloud.gateway.routes=
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: my-service-route
+          uri: http://my-service.example.com
+          predicates:
+            - Path=/my-service/**
+
+#Single line configuration           
+spring.cloud.gateway.routes[0].id=customer;
+spring.cloud.gateway.routes[0].uri=http://8081;
+spring.cloud.gateway.routes[0].predicates[0]=Path=/app1/**
+            
